@@ -3,8 +3,11 @@ package dummy.pokemon;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class App {
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
+	}
+
+	@ModelAttribute
+	public void setVaryResponseHeader(HttpServletResponse response) {
+		// cross domain request/CORS
+		response.setHeader("Access-Control-Allow-Origin", "*");
 	}
 
 	@RequestMapping("/api/v1/deck")
